@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+.register h3 {
+  text-align: center;
+}
+
+.register form {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.register input {
+  margin-bottom: 20px;
+}
