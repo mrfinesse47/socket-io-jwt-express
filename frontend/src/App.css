@@ -1,3 +1,15 @@
+.App {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.site-header {
+  display: flex;
+  margin-bottom: 1px solid #ccc;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .container {
   display: flex;
   justify-content: center;

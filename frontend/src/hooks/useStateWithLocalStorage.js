@@ -5,8 +5,10 @@ const useStateWithLocalStorage = (localStorageKey, fallBack) => {
   if (storageVal === "true") {
     storageVal = true;
   } //typecasting to bool
-  if (storageVal === "false") {
+  else if (storageVal === "false") {
     storageVal = false;
+  } else if (storageVal === "null") {
+    storageVal = null;
   }
   const [value, setValue] = useState(storageVal || fallBack);
   //brings in the initial value from local storage and sets state or sets state to the fallback

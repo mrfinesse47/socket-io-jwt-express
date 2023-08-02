@@ -27,6 +27,8 @@ const registerUser = asyncHandler(async (req, res) => {
   const user = await User.create({ name, email, password: hashedPassword });
 
   if (user) {
+    const io = req.app.get("socketio"); //emiting  inside response
+    io.emit("hi!");
     res.status(201).json({
       _id: user.id,
       name: user.name,
@@ -44,11 +46,14 @@ const registerUser = asyncHandler(async (req, res) => {
 // @access Public
 
 const loginUser = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, socketId } = req.body;
   //check for user email
   const user = await User.findOne({ email });
 
   if (user && (await bcrypt.compare(password, user.password))) {
+    const io = req.app.get("socketio"); //emiting  inside response
+    io.emit("recieve_message", "hello");
+    io.to(socketId).emit(/* ... */);
     res.json({
       _id: user.id,
       name: user.name,

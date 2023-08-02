@@ -1,22 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-// const register = async (userData) => {
-//   const response = await axios.post(API_URL, userData);
-
-//   if (response.data) {
-//     localStorage.setItem("user", JSON.stringify(response.data)); //local storage has to be in strings
-//   }
-
-//   return response.data;
-// };
-
-const Register = () => {
+const Register = ({ user, setUser, socket }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, useNavigate]);
+
   const registerHandler = async (e) => {
     const userData = { name: userName, email, password, password2: password };
     e.preventDefault();
@@ -25,7 +22,7 @@ const Register = () => {
       userData
     );
     if (response.data) {
-      localStorage.setItem("user", JSON.stringify(response.data)); //local storage has to be in strings
+      setUser(response.data);
       navigate("/");
     }
   };
